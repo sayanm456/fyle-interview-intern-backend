@@ -19,7 +19,6 @@ class AssignmentStateEnum(str, enum.Enum):
     SUBMITTED = 'SUBMITTED'
     GRADED = 'GRADED'
 
-
 class Assignment(db.Model):
     __tablename__ = 'assignments'
     id = db.Column(db.Integer, db.Sequence('assignments_id_seq'), primary_key=True)
@@ -91,3 +90,7 @@ class Assignment(db.Model):
     @classmethod
     def get_assignments_by_teacher(cls):
         return cls.query.all()
+    
+    @classmethod
+    def get_assignments_by_grade(cls, grade):
+        return cls.filter(cls.grade == grade).all()
